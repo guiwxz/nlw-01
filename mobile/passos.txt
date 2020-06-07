@@ -1,0 +1,41 @@
+- Usa o expo pra criar o projeto
+    > expo init mobile --npm
+    ( - Template: Blank (typescript) )
+
+- cria as pasta e pagina
+
+- configurar a stutusBar do celular: StatusBar
+
+- Instalando Fontes utilizando o expo-google-fonts:
+    > expo install expo-font @expo-google-fonts/ubuntu @expo-google-fonts/roboto
+
+- Para fazer a navegação entre as paginas usa:
+    > npm install @react-navigation/native
+    > expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+        (caso comece a dar erros, instalar isso tudo separadamente)
+    
+- Forma de navegação (stack = pilha)
+    > npm install @react-navigation/stack
+
+- Mapa
+    > expo install react-native-maps
+
+- Constants
+    > expo install expo-constants
+
+- Para que o react-native entenda as imagens em svg
+    > expo install react-native-svg
+
+- Ligar com a API
+    > npm install axios
+
+- Localizar a localização do usuario
+    > expo install expo-location
+
+- enviar um email MAIL COMPOSER
+    > expo install expo-mail-composer
+
+- enviar msg no Whatsapp com o Linking
+
+- La no Home na hora de selecionar as cidades o certo é fazer com a API do IBGE igual na WEB
+    - utilizando o react-native-picker-select ao invés do select do HTML

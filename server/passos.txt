@@ -1,0 +1,111 @@
+    TYPESCRIPT: torna o javascript uma linguagem tipada, ou seja, ele mostra tudo que há numa variavel por exemplo. Td que pode ser usado.
+
+- criação do backend (server): 
+    > npm init -y
+
+- instala express: 
+    > npm install express
+
+- como dessa vez é usado typescript é necessário algumas dependencias que ficam as tipagens de certas bibliotecas
+    por exemplo: o express tem sua tipagem separada, entao precisa instalar: 
+        > npm install @types/express -D 
+
+- o node só entende o javascript e n o TYPESCRIPT
+
+- para iniciar a aplicação:
+    > npm install ts-node -D
+    > npm install typescript -D
+    > npx tsc --init (precisa-se criar um arquivo de configuração do typescript)
+    > npx ts-node src/server.ts (executa o server) 
+    (npx serve pra executar pacotes que instalamos da pasta .bin do node_modules)
+
+- para que possamos deixar o server aberto pra atualizar qdo salvamos usa:
+    > npm install ts-node-dev -D (sdds nodemon)
+    > npx ts-node-dev src/server.ts (pra executar o server)
+
+- novamente pra deixar as coisas mais faceis, cria-se um script la no package.json chamado "dev"
+    - "dev": "ts-node-dev src/server.ts"
+    > npm run dev (pra executar o server)
+
+- separa as rotas no arquivo routes.ts
+
+- configura o BD (usando knex e sqlite3)
+    > npm install knex
+    > npm install sqlite3 (com esse BD é possivel escrever todo BD com javascript e deixar em um arquivo dentro do projeto, sem instalar nd)
+    
+    - cria a pasta database e um arquivo connection
+
+    - faz um mapeamento pra saber oq precisa ter no bando de dados
+
+    - cria pasta migrations
+        - os arquivos que estão dentro tem que ser criados na ordem certa pra que o arquivo que vai relacionar as duas tabelas venha depois das tabelas criadas
+            > 00_create
+            > 01_create
+            > 02_create
+
+    - cria as tabelas dentro dos arquivos conforme feito no mapeamento
+        - cria as duas tabelas primarias de points e items, depois cria a ultima relacionando essas duas
+            - points: pontos de coleta
+            - items: itens coletados nos pontos
+            -* pode ser coletado mais de um item em cada ponto, e pode ser coletado um item em vários pontos (n-n)
+
+    - cria um arquivo na raiz do projeto (knexfile.ts)
+        - ele possui uma configurações que o connections nao tem
+
+    - executa o comando
+        > npx knex migrate:latest --knexfile knexfile.ts migrate:latest
+        - se deu td certo, da pra usar a extensão do sqlite pra visualizar a tabela
+            - ctrl+shift+p -> 'sqlite' -> Open DataBase -> seleciona aquela q foi feita
+            - pelo sqlite explorer no cantinho ali da pra abrir a tabela
+
+        - cria um script no package.json pra executar o knex migrate
+            - "knex:migrate": "knex --knexfile knexfile.ts migrate:latest"
+            > npm run knex:migrate
+
+    - cria uma pasta seeds
+        - cria um arquivo create_items.ts
+            - seeds são usadas pra que ja tenha informaçoes no banco de dados 
+            - assim é possível deixar pré-definido ja os cadastros de items
+            - arruma o knexfile e adiciona as seeds la
+            - cria um script no package.json
+                - "knex:seed": "knex --knexfile knexfile.ts seed:run"
+                > npm run knex:seed
+
+- adicionar uma rota pra acessar as imagens
+
+- cria as rotas
+    - com o mongoDB usava o axios, agora a gente importa a conexão do banco de dados com o knex
+
+- se caso quando é necessário reiniciar o server ele demore pra startar é possivel:
+    - adicionar --ignore-watch node_modules no script
+        > "dev": "ts-node-dev --ignore-watch node_modules src/server.ts", 
+
+- separa as rotas nos controllers
+
+- adiciona o cors
+    > npm install cors -D
+    > npm install @types/cors
+    - com o cors é possível determinar qual será o dominio que vai poder acessar nossa aplicação
+
+- pra deletar td que ja foi criado no banco de dados:
+    - ali do lado no sqlite explorer abre aquele q quer alterar ->New Query (select)
+    - dps la dentro escreve DELETE * FROM points;
+    - ctrl+shift+p
+    - RUN query
+
+- UPLOAD DE imagens
+    > npm install multer
+    > npm install @types/multer -D
+    - pasta config e configura o multer
+    - o upload é feito na pasta do projeto msm
+    - mudar as coisas de como recebem a imagem, por exemplo em alguns locais era a URL
+    - pra testar la no insomnia não é mais JSON que tem q enviar. Pra adicionar uma imagem tem que usar o multipart
+    
+
+-> Serialização / API tranform 
+
+- VALIDACAO DE DADOS 
+    - CELEBRATE
+    > npm install celebrate
+    > npm install @types/hapi__joi -D
+

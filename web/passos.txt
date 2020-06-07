@@ -1,0 +1,36 @@
+- cria o projeto react com typescript
+    > npx create-react-app web --template=typescript
+
+- limpar as coisa desnecessarias
+
+- MUITO importante usar o conceito de componentes do react
+    - criar os componentes separadinhos nos arquivos e depois reaproveita-los
+
+- começa criando o html e estilização da pagina
+    - icones:
+        > npm install react-icons
+
+- ROTAS
+    > npm install react-router-dom
+    > npm install @types/react-router-dom -D
+
+- construção das paginas
+
+- integrando o mapa
+    - mapa LEAFTLET
+    - site: https://react-leaflet.js.org/
+    > npm install leaflet react-leaflet
+
+- comunicação com a api (backend) utilizando AXIOS
+    > npm install axios
+
+- adicionando a api do IBGE para ter o controle de cidades por estado
+
+- Documentação interessante pra ajudar com o typescript 
+    - typescript react cheat sheet (github)
+
+- UPLOAD de imagens
+    - plugin: react-dropzone
+    > npm install react-dropzone
+
+- Validacao de dados: YUP e celebrate
